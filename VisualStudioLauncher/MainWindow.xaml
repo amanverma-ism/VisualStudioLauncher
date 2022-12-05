@@ -1,0 +1,42 @@
+﻿<Window x:Class="VisualStudioLauncher.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VisualStudioLauncher"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="Auto" Width="Auto" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style x:Key="ButtonBorder"  TargetType="Border">
+            <Setter Property="CornerRadius" Value="{Binding VSButtonCornerRadius, Mode=OneWay}"/>
+        </Style>
+    </Window.Resources>
+    <Grid Background="Transparent">
+        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Top" x:Name="_TopStackPanel" >
+            <ContentControl x:Name="_VSLauncherButton_ContentControl" BorderThickness="0" VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch">
+                <Image x:Name="_VSLauncherButton_ContentControl_Image" Margin="0,0,0,0" />
+                <ContentControl.ContextMenu>
+                    <ContextMenu x:Name="_VSLauncherButton_ContentControl_ContextMenu">
+                        <MenuItem Header="Run as Admin" Name="RunAsAdmin"
+                                  IsCheckable="True"
+                                  IsChecked="{Binding RunAsAdminChecked, Mode=TwoWay}"
+                                  IsEnabled="True"/>
+                        <MenuItem Header="Close" Name="Close1"
+                                  IsCheckable="False"
+                                  Click="MenuItem_Close_Clicked"
+                                  IsEnabled="True"/>
+                    </ContextMenu>
+                </ContentControl.ContextMenu>
+            </ContentControl>
+            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Bottom" x:Name="_mainStackPanel" Margin="0,0,0,0" Width="{Binding MainStackPanelWidth, Mode=OneWay}" Height="{Binding MainStackPanelHeight, Mode=OneWay}">
+                <DockPanel Margin="0,20,20,0" HorizontalAlignment="Right" VerticalAlignment="Top" x:Name="dp1" Height="{Binding ReloadDockPanelHeight, Mode=OneWay}" Width="{Binding ReloadDockPanelWidth, Mode=OneWay}">
+                    <Button x:Name="_reloadInsInf" Content="Reload Installation Information" HorizontalAlignment="Right" Height="{Binding ReloadButtonHeight, Mode=OneWay}" VerticalAlignment="Top" Width="{Binding ReloadButtonWidth, Mode=OneWay}"/>
+                </DockPanel>
+                <DockPanel Margin="10,20,10,10" VerticalAlignment="Top" HorizontalAlignment="Center" Width="{Binding vsDockPanelWidth, Mode=OneWay}" Height="{Binding vsDockPanelHeight, Mode=OneWay}" x:Name="dp2">
+                    <StackPanel x:Name="_vsInstallationsContainer" HorizontalAlignment="Center" Height="{Binding vsDockPanelHeight, Mode=OneWay}" Width="{Binding vsDockPanelWidth, Mode=OneWay}" VerticalAlignment="Top" />
+                </DockPanel>
+            </StackPanel>
+        </StackPanel>
+
+    </Grid>
+</Window>

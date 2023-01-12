@@ -187,6 +187,7 @@ namespace VisualStudioLauncher
             this.AllowsTransparency = true;
             this.Background = Brushes.Transparent;
             _mainStackPanel.Visibility = Visibility.Collapsed;
+            _mainStackPanelPopup.IsOpen = false;
             this.WindowStartupLocation = WindowStartupLocation.Manual;
             this.Left = System.Windows.SystemParameters.WorkArea.Right * 0.9;
             this.Width = System.Windows.SystemParameters.WorkArea.Width * 0.1;
@@ -229,9 +230,10 @@ namespace VisualStudioLauncher
                     {
                         if (!_mainStackPanelCursorInside && !_mainStackPanel.IsMouseDirectlyOver && !_VSLauncherButton_ContentControl.IsMouseDirectlyOver && _mainStackPanel.Visibility == Visibility.Visible)
                         {
+                            _mainStackPanel.Visibility = Visibility.Collapsed;
+                            _mainStackPanelPopup.IsOpen = false;
                             this.Width = System.Windows.SystemParameters.WorkArea.Width * 0.1;
                             this.Height = System.Windows.SystemParameters.WorkArea.Height * 0.1;
-                            _mainStackPanel.Visibility = Visibility.Collapsed;
                             Debug.WriteLine("mainstackpanel visibility collapsed: _VSLauncherButton_MouseLeave");
                             RefreshView();
                         }
@@ -256,9 +258,10 @@ namespace VisualStudioLauncher
         private void _mainStackPanel_MouseLeave(object sender, MouseEventArgs e)
         {
             _mainStackPanelCursorInside = false;
+            _mainStackPanel.Visibility = Visibility.Collapsed;
+            _mainStackPanelPopup.IsOpen = false;
             this.Width = System.Windows.SystemParameters.WorkArea.Width * 0.1;
             this.Height = System.Windows.SystemParameters.WorkArea.Height * 0.1;
-            _mainStackPanel.Visibility = Visibility.Collapsed;
             Debug.WriteLine("mainstackpanel visibility collapsed: _mainStackPanel_MouseLeave");
             RefreshView();
         }
@@ -272,17 +275,35 @@ namespace VisualStudioLauncher
 
             this.Width = System.Windows.SystemParameters.WorkArea.Width * 0.4;
             this.Height = System.Windows.SystemParameters.WorkArea.Height * 0.4;
+            _mainStackPanelPopup.IsOpen = true;
             _mainStackPanel.Visibility = Visibility.Visible;
             RefreshView();
             Debug.WriteLine("mainstackpanel visible: _VSLauncherButton_ContentControl_MouseEnter");
 
         }
 
+        //private bool EnsureVisible()
+        //{
+        //    this.po
+        //    Rectangle ctrlRect = this.bou; //The dimensions of the ctrl
+        //    ctrlRect.Y = ctrl.Top; //Add in the real Top and Left Vals
+        //    ctrlRect.X = ctrl.Left;
+        //    Rectangle screenRect = Screen.GetWorkingArea(ctrl); //The Working Area fo the screen showing most of the Ctrl
+
+        //    //Now tweak the ctrl's Top and Left until it's fully visible. 
+        //    ctrl.Left += Math.Min(0, screenRect.Left + screenRect.Width - ctrl.Left - ctrl.Width);
+        //    ctrl.Left -= Math.Min(0, ctrl.Left - screenRect.Left);
+        //    ctrl.Top += Math.Min(0, screenRect.Top + screenRect.Height - ctrl.Top - ctrl.Height);
+        //    ctrl.Top -= Math.Min(0, ctrl.Top - screenRect.Top);
+
+        //}
+
         private void _VSLauncherButton_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            _mainStackPanel.Visibility = Visibility.Collapsed;
+            _mainStackPanelPopup.IsOpen = false;
             this.Width = System.Windows.SystemParameters.WorkArea.Width * 0.1;
             this.Height = System.Windows.SystemParameters.WorkArea.Height * 0.1;
-            _mainStackPanel.Visibility = Visibility.Collapsed;
             Debug.WriteLine("mainstackpanel visibility collapsed: _VSLauncherButton_PreviewMouseLeftButtonDown");
             RefreshView();
             (sender as ContentControl).Cursor = Cursors.SizeAll;

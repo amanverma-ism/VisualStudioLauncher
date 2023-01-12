@@ -28,14 +28,16 @@
                     </ContextMenu>
                 </ContentControl.ContextMenu>
             </ContentControl>
-            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Bottom" x:Name="_mainStackPanel" Margin="0,0,0,0" Width="{Binding MainStackPanelWidth, Mode=OneWay}" Height="{Binding MainStackPanelHeight, Mode=OneWay}">
-                <DockPanel Margin="0,20,20,0" HorizontalAlignment="Right" VerticalAlignment="Top" x:Name="dp1" Height="{Binding ReloadDockPanelHeight, Mode=OneWay}" Width="{Binding ReloadDockPanelWidth, Mode=OneWay}">
-                    <Button x:Name="_reloadInsInf" Content="Reload Installation Information" HorizontalAlignment="Right" Height="{Binding ReloadButtonHeight, Mode=OneWay}" VerticalAlignment="Top" Width="{Binding ReloadButtonWidth, Mode=OneWay}"/>
-                </DockPanel>
-                <DockPanel Margin="10,20,10,10" VerticalAlignment="Top" HorizontalAlignment="Center" Width="{Binding vsDockPanelWidth, Mode=OneWay}" Height="{Binding vsDockPanelHeight, Mode=OneWay}" x:Name="dp2">
-                    <StackPanel x:Name="_vsInstallationsContainer" HorizontalAlignment="Center" Height="{Binding vsDockPanelHeight, Mode=OneWay}" Width="{Binding vsDockPanelWidth, Mode=OneWay}" VerticalAlignment="Top" />
-                </DockPanel>
-            </StackPanel>
+            <Popup x:Name="_mainStackPanelPopup" PlacementTarget="{Binding Path=_TopStackPanel, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}, AncestorLevel=1}}" Placement="Bottom" PopupAnimation="Fade" AllowsTransparency="True">
+                <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Bottom" x:Name="_mainStackPanel" Margin="0,0,0,0" Width="{Binding MainStackPanelWidth, Mode=OneWay}" Height="{Binding MainStackPanelHeight, Mode=OneWay}">
+                    <DockPanel Margin="0,20,20,0" HorizontalAlignment="Right" VerticalAlignment="Top" x:Name="dp1" Height="{Binding ReloadDockPanelHeight, Mode=OneWay}" Width="{Binding ReloadDockPanelWidth, Mode=OneWay}">
+                        <Button x:Name="_reloadInsInf" Content="Reload Installation Information" HorizontalAlignment="Right" Height="{Binding ReloadButtonHeight, Mode=OneWay}" VerticalAlignment="Top" Width="{Binding ReloadButtonWidth, Mode=OneWay}"/>
+                    </DockPanel>
+                    <DockPanel Margin="10,20,10,10" VerticalAlignment="Top" HorizontalAlignment="Center" Width="{Binding vsDockPanelWidth, Mode=OneWay}" Height="{Binding vsDockPanelHeight, Mode=OneWay}" x:Name="dp2">
+                        <StackPanel x:Name="_vsInstallationsContainer" HorizontalAlignment="Center" Height="{Binding vsDockPanelHeight, Mode=OneWay}" Width="{Binding vsDockPanelWidth, Mode=OneWay}" VerticalAlignment="Top" />
+                    </DockPanel>
+                </StackPanel>
+            </Popup>
         </StackPanel>
 
     </Grid>
